@@ -1,0 +1,9 @@
+*.npy
+data
+data_fc
+.vscode
+path
+result
+tmp
+__pycache__
+*.npz
