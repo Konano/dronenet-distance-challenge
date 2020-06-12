@@ -7,3 +7,4 @@ result
 tmp
 __pycache__
 *.npz
+*.zip
