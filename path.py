@@ -1,5 +1,5 @@
 import numpy as np
-import progressbar, os
+import os, sys
 import convex
 import geo
 from s2sphere import Cap, LatLng, RegionCoverer, Cell, CellId
@@ -15,9 +15,9 @@ def earthMetersToRadians(meters):
 
 def getCoveringRect(lat, lng, radius):
     radius_radians = earthMetersToRadians(radius)
-    latlng = LatLng.from_degrees(float(lat), 
+    latlng = LatLng.from_degrees(float(lat),
              float(lng)).normalized().to_point()
-    region = Cap.from_axis_height(latlng, 
+    region = Cap.from_axis_height(latlng,
     (radius_radians*radius_radians)/2)
     coverer = RegionCoverer()
     coverer.min_level = 1
@@ -62,7 +62,7 @@ def load(cell_id):
         if p_14 not in lv14.keys():
             lv14[p_14] = []
         lv14[p_14].append(data[i])
-    
+
     global portals
     portals = np.concatenate((portals, data))
 
@@ -126,11 +126,9 @@ def path(start_lat, start_lng):
         draw.append({"type": "circle", "latLng": {"lat": pos[token][0], "lng": pos[token][1]}, "radius": 500, "color":"#a24ac3"})
         draw[0]['latLngs'].append({"lat": pos[token][0], "lng": pos[token][1]})
 
-    with open(f'path/{start_lat}_{start_lng}.json', 'w') as f:
+    with open(f'path_{start_lat}_{start_lng}.json', 'w') as f:
         json.dump(draw, f)
 
+
 if __name__ == "__main__":
-    path(30.695708, 104.085979) # Chengdu
-    # path(22.206281,114.217557) # HK
-    # path(39.92563,116.622723) # BJ
-    # path(36.578364,139.057291) # Tokyo
+    path(float(sys.argv[1]), float(sys.argv[2]))

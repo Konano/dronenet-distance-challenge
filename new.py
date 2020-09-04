@@ -37,7 +37,7 @@ collect = np.load("collect.npy")
 #     while len(points) >= 1000:
 #         points = points[:-1000] + convex.graham_scan(points[-1000:])
 #     return convex.graham_scan(points)
-    
+
 
 # def faraway(points):
 #     if len(points) > 100:
@@ -67,10 +67,16 @@ collect = np.load("collect.npy")
 collect = np.load("convex.npy")
 far = np.load("far.npy")
 
-mnlat = 18.60460138845525
-mxlat = 43.197167282501276
-mnlng = 97.91015624999999
-mxlng = 124.01367187499999
+# china = [
+#     [26.54922257769204, 49.75287993415023, 73.6083984375, 102.041015625],
+#     [17.22475820662464, 53.461890432859114, 97.3828125, 123.96972656249999],
+#     [38.85682013474361, 53.72271667491848, 114.60937499999999, 135.3955078125]
+# ]
+
+# mnlat = 18.60460138845525
+# mxlat = 43.197167282501276
+# mnlng = 97.91015624999999
+# mxlng = 124.01367187499999
 
 # for i in range(100):
 #     with open(f'result/{i}.json', 'w') as f:
@@ -85,19 +91,24 @@ def random_bits(len):
         n = os.urandom(len)
     return n
 
-with open(f'result/Top100.json', 'w') as f:
-    all = []
-    for i in range(100):
-        color = f'#{random_bits(24).hex()}'
-        all += [{"type": "marker", "latLng": {"lat": x[0], "lng": x[1]}, "color": color} for x in collect[int(far[i][1])]]  
-        print(i, color, far[i][0])
-    json.dump(all, f)
-
-# with open(f'result/TopChina.json', 'w') as f:
+# with open(f'result/Top100.json', 'w') as f:
 #     all = []
-#     for i in range(1000):
-#         if mnlat <= collect[int(far[i][1])][0][0] and collect[int(far[i][1])][0][0] <= mxlat and mnlng <= collect[int(far[i][1])][0][1] and collect[int(far[i][1])][0][1] <= mxlng:
-#             color = f'#{random_bits(24).hex()}'
-#             all += [{"type": "marker", "latLng": {"lat": x[0], "lng": x[1]}, "color": color} for x in collect[int(far[i][1])]]  
-#             print(i, color, far[i][0])
+#     for i in range(100):
+#         color = f'#{random_bits(24).hex()}'
+#         all += [{"type": "marker", "latLng": {"lat": x[0], "lng": x[1]}, "color": color} for x in collect[int(far[i][1])]]
+#         print(i, color, far[i][0])
 #     json.dump(all, f)
+
+with open(f'result/TopChina.json', 'w') as f:
+    all = []
+    for i in range(2000):
+        for j in range(3):
+            if china[j][0] <= collect[int(far[i][1])][0][0] and \
+               collect[int(far[i][1])][0][0] <= china[j][1] and \
+               china[j][2] <= collect[int(far[i][1])][0][1] and \
+               collect[int(far[i][1])][0][1] <= china[j][3]:
+                color = f'#{random_bits(24).hex()}'
+                all += [{"type": "marker", "latLng": {"lat": x[0], "lng": x[1]}, "color": color} for x in collect[int(far[i][1])]]
+                print(i, color, far[i][0])
+                break
+    json.dump(all, f)
