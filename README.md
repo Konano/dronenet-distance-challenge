@@ -6,8 +6,10 @@
 
 接着运行以下命令：
 
-> pip install -r requirements.txt
-> python3 path.py [latitude] [longitude]
+```bash
+pip install -r requirements.txt
+python3 path.py [latitude] [longitude]
+```
 
 其中 `latitude` 和 `longitude` 是你想要查询的起始 Portal 的经纬度坐标，可从 Ingress IITC 上获知。
 
