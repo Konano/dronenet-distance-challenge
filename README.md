@@ -2,7 +2,7 @@
 
 ## 查询从某一 Portal 出发最远飞行距离和方案
 
-首先下载数据压缩包文件（[Mega](https://mega.nz/file/PsYnkCoD#ujlASFyomu1ZT8WZXi1_57ogH3pneGRXT2EC156u-lg)）并解压到项目当前文件夹内，其解压后的文件夹名为 `data`。
+首先下载数据压缩包文件（[Mega](https://mega.nz/file/PsYnkCoD#ujlASFyomu1ZT8WZXi1_57ogH3pneGRXT2EC156u-lg) or [bjres](http://bjres.net/downloads/portaldata.zip)）并解压到项目当前文件夹内，其解压后的文件夹名为 `data`。
 
 接着运行以下命令：
 
